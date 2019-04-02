@@ -1,6 +1,6 @@
 import { JsonController, NotFoundError, HttpCode,Get,Post, Param,Put,Body } from 'routing-controllers'
 // type PageList = { pages: Page[] }
-import Advertisement from './entity'
+import Event from './entity'
 // import { validate } from 'class-validator'
 
 @JsonController()
@@ -10,32 +10,33 @@ export default class PageController {
     getPage(
         @Param('id') id: number
     ) {
-        return Advertisement.findOne(id)
+        return Event.findOne(id)
     }
 
-    @Get("/advertisements")
+    @Get("/events")
    async allAdvertisements(
     ){
+        console.log("****************Events********")
         // const value = Object.values(pagesById)
-        const advertisements = await Advertisement.find()
+        const events = await Event.find()
         return {
-            advertisements
+            events
         }
     }
 
     @Put('/advertisements/:id')
     async updateAdvertisement(
     @Param('id') id: number,
-    @Body() update: Partial<Advertisement>
+    @Body() update: Partial<Event>
     ){ 
-        const advertisement =await Advertisement.findOne(id)
+        const advertisement =await Event.findOne(id)
         if (!advertisement) throw new NotFoundError('Cannot find page')
-        return Advertisement.merge(advertisement, update).save() }
+        return Event.merge(advertisement, update).save() }
 
     @Post('/pages')
     @HttpCode(201)
     async createPage(
-    @Body() advertisement: Advertisement) {
+    @Body() advertisement: Event) {
         
             return advertisement.save()
         
