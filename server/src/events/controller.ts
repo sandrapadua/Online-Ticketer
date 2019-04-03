@@ -6,25 +6,38 @@ import Event from './entity'
 @JsonController()
 export default class PageController {
 
-    @Get('/advertisements/:id')
-    getPage(
-        @Param('id') id: number
-    ) {
-        return Event.findOne(id)
-    }
+    // @Get('/events/:id')
+    // getPage(
+    //     @Param('id') id: number
+    // ) {
+    //     return Event.findOne(id)
+    // }
 
-    @Get("/events")
-   async allAdvertisements(
-    ){
-        console.log("****************Events********")
-        // const value = Object.values(pagesById)
-        const events = await Event.find()
+    @Get('/eventslist')
+   async allevents(){
+        console.log("****************Events into LIst********")
+        const eventsList = await Event.find()
         return {
-            events
+            eventsList
         }
-    }
+   }
+   @Get('/events/:id')
+  getEvent(
+      @Param('id') id: number) {
+      console.log('entered*******************')
+    return Event.findOne(id);
+  }
+//   @Get('/eventslist')
+//   getAd(@Param('category') category: string) {
+//     return Event.findOne(id);
+//   }
 
-    @Put('/advertisements/:id')
+    // @Get('/users/:id')
+    // getUser(@Param('id') id: number) {
+    //   return User.findOne(id);
+    // }
+
+    @Put('/events/:id')
     async updateAdvertisement(
     @Param('id') id: number,
     @Body() update: Partial<Event>

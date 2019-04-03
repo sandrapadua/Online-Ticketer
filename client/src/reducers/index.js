@@ -1,4 +1,5 @@
 import {combineReducers} from 'redux'
-import advertisements from'./advertisements'
+import events from'./events'
+import eventsList from './eventsList'
 export default combineReducers({
-    advertisements})
+    events,eventsList})

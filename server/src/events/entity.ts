@@ -21,4 +21,7 @@ export default class Event extends BaseEntity {
   
   @Column('text')
   endDate: Date
+
+  @Column('text',{nullable: true})
+  category: string
 }
