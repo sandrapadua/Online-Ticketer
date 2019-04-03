@@ -2,8 +2,10 @@ import {
   BaseEntity,
   Entity, 
   PrimaryGeneratedColumn, 
-  Column } from 'typeorm'
+  Column ,
+  OneToMany} from 'typeorm'
 import { IsString, MinLength} from 'class-validator'
+import Ticket from '../ticket/entity';
 
 
 @Entity()
@@ -22,12 +24,15 @@ export default class Event extends BaseEntity {
   description: string
 
   @Column('text', {nullable:false})
-  picture: string
+  pictureUrl: string
   
   @Column('date', {nullable:false})
   startDate: Date
 
   @Column('date', {nullable:true})
   endDate: Date
+
+  @OneToMany(_type => Ticket, ticket => ticket.event, {eager:true})
+  tickets: Ticket[];
 
 }
