@@ -12,6 +12,7 @@ const loadEvents = (events) => ({
 })
 
 export const getEvents = () => (dispatch) => {
+  console.log("get all events in action")
   request
     .get(`${baseUrl}/events`)
     .then(result => dispatch(loadEvents(result.body)))

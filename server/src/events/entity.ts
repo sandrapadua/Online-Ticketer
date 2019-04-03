@@ -1,5 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
-import { BaseEntity } from 'typeorm/repository/BaseEntity'
+import { 
+  BaseEntity,
+  Entity, 
+  PrimaryGeneratedColumn, 
+  Column } from 'typeorm'
+import { IsString, MinLength} from 'class-validator'
+
 
 @Entity()
 export default class Event extends BaseEntity {
@@ -7,21 +12,22 @@ export default class Event extends BaseEntity {
   @PrimaryGeneratedColumn()
   id?: number
 
-  @Column('text')
-  title: string
+  @IsString()
+  @MinLength(2)
+  @Column('text', {nullable:false})
+  name: string
 
-  @Column('text')
+  @IsString()
+  @Column('text', {nullable:false})
   description: string
 
-  @Column('text')
-  pictureUrl: string
-
-  @Column('text')
-  startDate: Date
+  @Column('text', {nullable:false})
+  picture: string
   
-  @Column('text')
+  @Column('date', {nullable:false})
+  startDate: Date
+
+  @Column('date', {nullable:true})
   endDate: Date
 
-  @Column('text',{nullable: true})
-  category: string
 }
