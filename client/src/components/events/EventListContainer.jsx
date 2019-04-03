@@ -1,28 +1,47 @@
 import React, { PureComponent } from 'react'
-import { userId } from '../../jwt'
-import { getUsers } from '../../actions/users'
-import { getEvents } from '../../actions/events'
-import EventsList from './EventsList'
+import {fetchAllEvents, createEvent} from '../../actions/events'
+import EventForm from './EventForm'
 import { connect } from 'react-redux'
+import {Link} from 'react-router-dom'
 
 class EventsListContainer extends PureComponent {
 
+   
     componentWillMount() {
-        if (this.props.authenticated) {
-            if (this.props.users === null) this.props.getUsers()
-        }
+        this.props.fetchAllEvents();
     }
-
-    componentDidMount() {
-        if (this.props.events.allEvents.length === 0) this.props.getEvents()
+    createEvent = (event) => {
+        this.props.createEvent(event)
     }
 
     render() {
+        const { events } = this.props;
+        const allEvents = events.allEvents
+        console.log("ALL EVENTS",events)
+        console.log("ALL EVENTS check",allEvents)
         return (
-            <EventsList
-                events={this.props.events.allEvents}
-                user={this.props.authenticated}
-            />
+           
+            <div>
+            <h1>All events</h1>
+                <ul className="event-list">
+                    { allEvents.map(event => (
+                            <Link className="event" key={event.id} to={`/events/${event.id}`}>
+                                <li className="event-item">
+                                    <h2 className="event-title">{event.name}</h2>
+                                    <img src={event.pictureUrl} alt=""/> 
+                                </li>
+                            </Link>
+                    ))}
+                </ul>
+
+                <br/>
+
+{ this.props.currentUser && <h2>Create a new event</h2> }
+{ this.props.currentUser && <p>-- Please, fill in all fields --</p> }
+
+{ this.props.currentUser && <EventForm onSubmit={this.createEvent} /> } 
+{ !this.props.currentUser && <h2>To create a new event, please <Link to="/login">login</Link></h2 >}
+                </div>
         )
     }
 }
@@ -30,15 +49,13 @@ class EventsListContainer extends PureComponent {
 const mapStateToProps = function (state) {
     return {
         events: state.events,
-        authenticated: state.currentUser !== null,
-        userId: state.currentUser && userId(state.currentUser.jwt),
-        users: state.users,
+        currentUser: state.currentUser 
     }
 }
 
 const mapDispatchToProps = {
-    getUsers,
-    getEvents
+    fetchAllEvents,
+    createEvent
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventsListContainer)

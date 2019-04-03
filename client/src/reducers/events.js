@@ -1,4 +1,5 @@
-import { LOAD_EVENTS, LOAD_EVENT_DETAILS, ADD_EVENT } from '../actions/events'
+import { FETCHED_ALL_EVENTS, LOAD_EVENT_DETAILS, ADD_EVENT } from '../actions/events'
+import {ADD_TICKET} from '../actions/ticket'
 
 const initialState = { allEvents: [], selectedEvent: null }
 
@@ -6,7 +7,7 @@ const reducer = (state = initialState, action = {}) => {
 
     switch (action.type) {
 
-        case LOAD_EVENTS:
+        case FETCHED_ALL_EVENTS:
         
             // events which are older than current will not show
             const formatDate = (n) => {
@@ -22,13 +23,16 @@ const reducer = (state = initialState, action = {}) => {
                 allEvents: action.payload.filter(event => event.endDate >= fullDate)
             }
 
-            case LOAD_EVENT_DETAILS:
-            console.log("at reducer")
-            return {
-                ...state,
-                selectedEvent: action.payload
-                
-            }
+            case ADD_EVENT:
+            return [...state, action.payload]
+
+            case ADD_TICKET:
+                const currentEvent = state.filter(event => event.Id === action.payload.event)[0];
+                currentEvent.tickets = [
+                ...currentEvent.tickets || [], { ...action.payload, comments: [] }
+                ];
+
+    return [...state, currentEvent];
 
         default:
         return state

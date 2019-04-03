@@ -1,37 +1,46 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, {PureComponent} from 'react';
+import { connect } from 'react-redux';
+import {fetchEvent} from '../../actions/event';
+import {createTicket} from '../../actions/ticket';
 
-export default function evenDetails(props) {
-    if (props.event === null) return 'Loading...'
-    return (
-        <div>
-          <Link to="/events">
-            <button>Events List</button>
-          </Link>
-          {props.user &&
-            <Link to={`/events/${props.event.id}/create-ticket`}>
-              <button>Add your ticket</button>
-            </Link>
-          }
-          <div>
-            <h2>Event: {props.event.name}</h2>
-            <p>There are total {(props.event.tickets.length)} ticket(s) for this event</p>
-          </div>
-          <div className="tickets-wrapper">
-            <h5>Seller</h5>
-            <h5>Price</h5>
-            <h5>Description</h5>
-          </div>
-          {props.event.tickets.map(ticket =>
-            <Link to={`${props.event.id}/tickets/${ticket.id}`} key={ticket.id} style={{ textDecoration: "none"}}>
-              <div className="tickets-wrapper">
-                <div>{ticket.user.email}</div>
-                <div>{ticket.price}</div>
-                <div>{ticket.description}</div>
-              </div>
-            </Link>
-          )}
-    
-        </div>
-      )
+import {Link} from 'react-router-dom';
+
+class EventDetails extends PureComponent {
+
+    componentWillMount() {
+        this.props.fetchEvent(this.props.match.params.id);
     }
+
+    render() {
+        const { event } = this.props;
+        if (!event) return null
+        return (
+            <div>
+                <h1>{event.name}</h1>
+                
+                <img src={event.pictureUrl} alt=""/>
+                {<p>Description: {event.description}</p>}
+                {<p>Start Date: {event.startDate}</p>}
+                {<p>End Date: {event.endDate}</p>}
+
+                <br/>
+
+                <h2>Tickets for sale:</h2>
+                { event.tickets.map(ticket => (<div key={ticket.id}>
+                    <Link to={`/ticket/${ticket.id}`}>{ticket.description}</Link>
+                    <p>Price: {ticket.price}</p>
+                    <img src={ticket.ticketPictureUrl} alt=""/>
+                </div> ))}
+                </div>)
+}
+}
+
+const mapStateToProps = function (state, props) {
+    return {
+      event: state.event,
+      currentUser: state.currentUser 
+    }
+}
+
+export default connect(mapStateToProps, {fetchEvent, createTicket})(EventDetails)
+       
