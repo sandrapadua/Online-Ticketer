@@ -10,26 +10,30 @@ class LoginPage extends PureComponent {
     }
     
     render() {
-        console.log("CURRENT USER",this.props.currentUser)
+
+        console.log("PROPS IN LOGIN PAGE",this.props)
 		if (this.props.currentUser) return (
 			<Redirect to="/" />
-		)
+        )
+
 
 		return (
 			<div>
 				<h1>Login</h1>
 
 				<LoginForm onSubmit={this.handleSubmit} />
-				<p>{this.props.login.error}</p> 
+                <p>error</p>
+				{ this.props.error && <span style={{color:'red'}}>{this.props.error}</span> }
 				</div>
 		)
     }
 }
 
     const mapStateToProps = function (state) {
+        console.log('ERROR',state.login.error)
         return {
             currentUser: state.currentUser,
-            // login: state.login.error  
+            error: state.login.error  
         }
     }
 

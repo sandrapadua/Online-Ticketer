@@ -6,4 +6,4 @@ import comments from './comments'
 import currentUser from './currentUser'
 import login from './login'
 export default combineReducers({
-    events,event,ticket,comments,currentUser})
+    events,event,ticket,comments,currentUser,login})

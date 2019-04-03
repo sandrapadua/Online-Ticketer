@@ -22,7 +22,10 @@ export default class LoginController {
     console.log("*********************LOGIN********************************",email,password)
       const user = await User.findOne({ where: { email } })
       console.log("USER***********",user)
-      if (!user || !user.id) throw new BadRequestError('A user with this email does not exist')
+      if (!user || !user.id){
+        console.log("*******Does not exist")
+        throw new BadRequestError('A user with this email does not exist')
+      } 
 
 
 

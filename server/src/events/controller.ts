@@ -1,4 +1,4 @@
-import { JsonController,Authorized,CurrentUser, Get,Param,Post, HttpCode, Body,} from 'routing-controllers'
+import { JsonController,Authorized, Get,Param,Post, HttpCode, Body,} from 'routing-controllers'
 import Event from './entity'
   @JsonController()
   export default class EventController {

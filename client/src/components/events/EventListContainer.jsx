@@ -11,6 +11,7 @@ class EventsListContainer extends PureComponent {
         this.props.fetchAllEvents();
     }
     createEvent = (event) => {
+        console.log("call from components to action")
         this.props.createEvent(event)
     }
 
