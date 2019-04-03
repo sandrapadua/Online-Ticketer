@@ -2,6 +2,8 @@ import React, {PureComponent} from 'react';
 import { connect } from 'react-redux';
 import {fetchTicket} from '../../actions/ticket';
 import {Link} from 'react-router-dom';
+import {createComment} from '../../actions/comment';
+import CommentForm from '../comments/CommentForm';
 
 class TicketDetails extends PureComponent {
     componentDidMount() {
@@ -25,16 +27,30 @@ class TicketDetails extends PureComponent {
                 {<p>Price: {ticket.price}</p>}
                 {<p>Seller: {ticket.user.firstName}</p>}
                 {<p>Created at: {ticket.created}</p>}
-                </div>)
-}
-}
+                <br/>
+
+                <h1>Comments:</h1>
+                { ticket.comments.map(comment => (<div key={comment.id}>
+                <h4>{comment.content}</h4>
+                <p>By {comment.author}</p>
+                </div> ))}
+
+                <br/>
+
+                { this.props.currentUser && <h2>Create a comment to this ticket</h2> }
+
+                { this.props.currentUser && <CommentForm ticketId={this.props.match.params.id} onSubmit={this.createComment} /> }
+                { !this.props.currentUser && <h2>To create a comment, please <Link to="/login">login</Link></h2> }
+                                </div>)
+                }
+                }
 const mapStateToProps = function (state, props) {
     console.log("MAP STATE TO PROPS",state.ticket)
     return {
         ticket: state.ticket,
-        // tickets: state.tickets,
+        tickets: state.tickets,
         currentUser: state.currentUser
     }
 }
 
-export default connect(mapStateToProps, {fetchTicket})(TicketDetails)
+export default connect(mapStateToProps, {fetchTicket,createComment})(TicketDetails)
