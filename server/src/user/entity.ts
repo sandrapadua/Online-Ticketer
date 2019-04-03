@@ -41,6 +41,7 @@ export default class User extends BaseEntity {
   }
 
   checkPassword(rawPassword: string): Promise<boolean> {
+    console.log("**************CHECK PASSWORD*****************",rawPassword,this.password)
     return bcrypt.compare(rawPassword, this.password)
   }
  

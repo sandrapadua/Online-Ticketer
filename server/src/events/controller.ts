@@ -1,6 +1,5 @@
-import { JsonController,Authorized, Get,Param,Post, HttpCode, Body,} from 'routing-controllers'
+import { JsonController,Authorized,CurrentUser, Get,Param,Post, HttpCode, Body,} from 'routing-controllers'
 import Event from './entity'
-
   @JsonController()
   export default class EventController {
   
@@ -22,8 +21,10 @@ import Event from './entity'
     @Post('/events')
     @HttpCode(201)
     createEvent(
+        
         @Body() event: Event
     ) {
+        console.log('*******************CREATE EVENT ****************')
         return event.save()
     } //post not working
 }

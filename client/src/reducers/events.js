@@ -24,6 +24,7 @@ const reducer = (state = initialState, action = {}) => {
             }
 
             case ADD_EVENT:
+            console.log("add event reducer")
             return [...state, action.payload]
 
             case ADD_TICKET:
