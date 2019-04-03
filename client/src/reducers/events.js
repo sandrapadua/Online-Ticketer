@@ -22,6 +22,14 @@ const reducer = (state = initialState, action = {}) => {
                 allEvents: action.payload.filter(event => event.endDate >= fullDate)
             }
 
+            case LOAD_EVENT_DETAILS:
+            console.log("at reducer")
+            return {
+                ...state,
+                selectedEvent: action.payload
+                
+            }
+
         default:
         return state
 }
