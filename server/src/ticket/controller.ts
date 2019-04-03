@@ -41,6 +41,7 @@ export default class TicketController {
          @Param('id') id: number,
          @Body() update: Partial<Ticket>
      ) {
+         console.log("8*********************details of ticket******************8")
          const ticket = await Ticket.findOne(id)
          if (!ticket) throw new NotFoundError('Cannot find this ticket')
 
