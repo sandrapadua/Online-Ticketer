@@ -5,6 +5,8 @@ import { Exclude } from 'class-transformer'
 import * as bcrypt from 'bcrypt'
 import Ticket from '../ticket/entity';
 
+
+
 @Entity()
 export default class User extends BaseEntity {
 
@@ -41,7 +43,10 @@ export default class User extends BaseEntity {
   checkPassword(rawPassword: string): Promise<boolean> {
     return bcrypt.compare(rawPassword, this.password)
   }
+ 
 
   @OneToMany(_Type => Ticket, ticket => ticket.user, {eager:true})
   tickets: Ticket[];
+  
+
 }

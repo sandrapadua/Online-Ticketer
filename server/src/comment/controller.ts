@@ -10,12 +10,14 @@ export default class CommentController {
         const comments = await Comment.find()
         return { comments }
     } 
+
     @Get('/comments/:id')
     getComment(
         @Param('id') id: number
     ) {
         return Comment.findOne(id)
     } 
+    
     @Authorized()
     @Post('/comments/:id')
     @HttpCode(201)

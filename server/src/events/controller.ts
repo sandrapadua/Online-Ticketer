@@ -1,7 +1,5 @@
 import { JsonController,Authorized, Get,Param,Post, HttpCode, Body,} from 'routing-controllers'
-// type PageList = { pages: Page[] }
 import Event from './entity'
-// import { validate } from 'class-validator'
 
   @JsonController()
   export default class EventController {

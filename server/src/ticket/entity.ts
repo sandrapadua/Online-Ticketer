@@ -9,6 +9,7 @@ import User from '../user/entity';
 export default class Ticket extends BaseEntity {
   @PrimaryGeneratedColumn()
   id?: number
+
   @Column('text')  //opcional
   ticketPictureUrl: string 
 
@@ -20,13 +21,13 @@ export default class Ticket extends BaseEntity {
   @Column('int', {nullable:false})
   price: number
 
-  @ManyToOne(_type => Event, event => event.tickets)
+  @ManyToOne(_type=> Event, event => event.tickets)
   event: number;
 
   @OneToMany(_type => Comment, comment => comment.ticket, {eager:true})
   comments: Comment[]; 
 
-  @ManyToOne(_Type => User, user => user.tickets)
+  @ManyToOne(_type => User, user => user.tickets)
   user: number;
 
   @Column('timestamp', {default: () => "CURRENT_TIMESTAMP"})
