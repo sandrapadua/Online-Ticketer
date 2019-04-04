@@ -8,6 +8,7 @@ import EventsListContainer from './components/events/EventListContainer'
 import TicketDetails from './components/tickets/TicketDetails'
 import LoginPage from './components/login/LoginPage'
 import TopBar from './components/layout/TopBar'
+import SignupPage from './components/signup/SignupPage'
 class App extends Component {
   render() {
     return (
@@ -19,6 +20,7 @@ class App extends Component {
       <Route exact path="/events/:id" component={EventDetails} />
       <Route exact path="/ticket/:id" component={TicketDetails} />
       <Route exact path="/login" component={LoginPage} />
+      <Route exact path="/signup" component={SignupPage} />
 </main>
     
             </div>
