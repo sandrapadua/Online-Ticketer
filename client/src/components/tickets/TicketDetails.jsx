@@ -65,6 +65,14 @@ if(myTicket.comments.length > 3){
     riskPercentage = riskPercentage + 5
 }
 
+//minimum risk percentage is 5% and maximum is 95%
+
+if(riskPercentage < 5){
+    riskPercentage = 5 
+}
+if(riskPercentage > 95){
+    riskPercentage = 95 
+}
 
 
 console.log("RISK",riskPercentage)
