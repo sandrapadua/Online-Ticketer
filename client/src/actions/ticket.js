@@ -8,7 +8,7 @@ const baseUrl = 'http://localhost:4000'
 export const createTicket = (ticket, eventId, user) => (dispatch, getState) => {
     const state = getState()
     const jwt = state.currentUser.jwt
-  
+  console.log("creating ticket")
     request
       .post(`${baseUrl}/tickets/${eventId}/${user}`)
       .set('Authorization', `Bearer ${jwt}`)

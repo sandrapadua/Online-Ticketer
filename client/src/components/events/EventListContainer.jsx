@@ -16,6 +16,7 @@ class EventsListContainer extends PureComponent {
     }
 
     render() {
+        
         const { events } = this.props;
         const allEvents = events.allEvents
         console.log("ALL EVENTS",events)
@@ -36,7 +37,7 @@ class EventsListContainer extends PureComponent {
                 </ul>
 
                 <br/>
-
+{console.log("CURRENT USER",this.props.currentUser)}
 { this.props.currentUser && <h2>Create a new event</h2> }
 { this.props.currentUser && <p>-- Please, fill in all fields --</p> }
 

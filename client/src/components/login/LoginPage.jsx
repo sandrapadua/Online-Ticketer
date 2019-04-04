@@ -6,6 +6,7 @@ import LoginForm from './LoginForm'
 
 class LoginPage extends PureComponent {
     handleSubmit = (data) => {
+        console.log("submit of login page")
 		this.props.login(data.email, data.password)
     }
     
@@ -22,7 +23,6 @@ class LoginPage extends PureComponent {
 				<h1>Login</h1>
 
 				<LoginForm onSubmit={this.handleSubmit} />
-                <p>error</p>
 				{ this.props.error && <span style={{color:'red'}}>{this.props.error}</span> }
 				</div>
 		)
