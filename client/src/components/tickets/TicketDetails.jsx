@@ -15,8 +15,56 @@ class TicketDetails extends PureComponent {
         const { ticket } = this.props;
         
         if (!ticket) return null
+
         console.log("TICKET IN TICKET DETAILS" ,ticket)
         console.log("TICKET" ,ticket.id)
+
+        // fraud risk calculation
+
+        let riskPercentage = 5;
+
+        let myTicket = ticket
+        console.log("MY TICKET" ,myTicket)
+        const TotalTicketOfUser = myTicket.user.tickets.length
+        console.log("TOTAL  TICKET" ,TotalTicketOfUser)
+
+        const allTicketForEvent = myTicket.event.tickets
+        console.log('allTicketForEvent',allTicketForEvent)
+
+        //if user created only one ticket
+        if(TotalTicketOfUser === 1 ){
+            riskPercentage = riskPercentage + 10;
+        }
+        // if ticket is created between the business hours or not 
+
+        console.log("TIME" ,myTicket.created.split('T')[1])
+        const ticketDate = new Date(myTicket.created)
+        console.log("DATE",ticketDate.getHours())
+
+        const hours = ticketDate.getHours()
+        const minutes = ticketDate.getMinutes()
+        const seconds = ticketDate.getSeconds()
+        const postedtime = `${hours}:${minutes}:${seconds}`
+        // const postedtime = '18:00:00'
+        console.log("posted time",postedtime)
+        if (postedtime > "09:00:00" && postedtime < "17:00:00"){
+            console.log("business time")
+            riskPercentage = riskPercentage - 10
+        }else{
+            riskPercentage = riskPercentage + 10
+            console.log("not business time")
+
+        }
+        console.log("RISK",riskPercentage)
+
+       // comments check comments >3
+
+
+
+
+
+
+
         return (
            
             <div>
