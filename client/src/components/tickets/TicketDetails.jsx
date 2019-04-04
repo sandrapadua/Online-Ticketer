@@ -58,11 +58,16 @@ class TicketDetails extends PureComponent {
         console.log("RISK",riskPercentage)
 
        // comments check comments >3
+console.log("COMMENTS" ,myTicket.comments)
+
+if(myTicket.comments.length > 3){
+    console.log("comments greater than 3")
+    riskPercentage = riskPercentage + 5
+}
 
 
 
-
-
+console.log("RISK",riskPercentage)
 
 
         return (
@@ -71,6 +76,8 @@ class TicketDetails extends PureComponent {
                 <h2>Ticket Details:</h2>
                 
                 <img src={ticket.ticketPictureUrl} alt=""/>
+                {<p>Risk percentage for the ticket: {riskPercentage}</p>}
+
                 {<p>Description: {ticket.description}</p>}
                 {<p>Price: {ticket.price}</p>}
                 {<p>Seller: {ticket.user.firstName}</p>}
