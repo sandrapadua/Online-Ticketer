@@ -73,10 +73,30 @@ if(riskPercentage < 5){
 if(riskPercentage > 95){
     riskPercentage = 95 
 }
+//risk percentage using the average of all ticket price
 
 
+const TicketPricesForEvent = allTicketForEvent.map(ticket => ticket.price)
+const averagePrice = TicketPricesForEvent.reduce((accumulator,current) => accumulator + current)/TicketPricesForEvent.length
+
+console.log(myTicket.price)
+let  percentageDiffrence = (((averagePrice - myTicket.price)/averagePrice)*100)
+console.log("avearage",percentageDiffrence)
+console.log("ticket prices",TicketPricesForEvent)
 console.log("RISK",riskPercentage)
 
+if(myTicket.price < averagePrice){
+    riskPercentage = riskPercentage + percentageDiffrence
+}else{
+    percentageDiffrence = percentageDiffrence * -1
+    if(percentageDiffrence > 10){
+        riskPercentage = riskPercentage -10 // deduct maximum 10
+    }else{
+        riskPercentage = riskPercentage - percentageDiffrence
+    }
+
+}
+console.log("RISK",riskPercentage)
 
         return (
            
