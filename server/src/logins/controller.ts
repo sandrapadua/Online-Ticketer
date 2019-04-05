@@ -19,7 +19,6 @@ export default class LoginController {
   async authenticate(
     @Body() { email, password }: AuthenticatePayload
   ) {
-    console.log("*********************LOGIN********************************",email,password)
       const user = await User.findOne({ where: { email } })
       console.log("USER***********",user)
       if (!user || !user.id){
@@ -30,16 +29,13 @@ export default class LoginController {
 
 
       if (!await user.checkPassword(password)) {
-        console.log("********************InCORRECT")
         // throw new BadRequestError('The password is not correct')   
          }
       else{
         console.log("********************CORRECT")
       }
         // 
-      console.log("************************password correct")
       const jwt = sign({ id: user.id })
-      console.log("***************",jwt, user.id)
       return { 'jwt':jwt, 'id':user.id }
     }
 }

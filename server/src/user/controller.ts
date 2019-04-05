@@ -33,6 +33,7 @@ export default class UserController {
     async createUser(
         @Body() user: User
     ) {
+      console.log("*************************entered into sign up**************")
         const {password, ...rest} = user
         const entity = User.create(rest)
         await entity.setPassword(password)
