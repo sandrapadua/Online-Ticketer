@@ -101,6 +101,7 @@ if(myTicket.price < averagePrice){
     }
 
 }
+riskPercentage = riskPercentage * -1
 console.log("RISK",riskPercentage)
 
         return (
