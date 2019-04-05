@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import { connect } from 'react-redux';
 import {fetchEvent} from '../../actions/event';
 import {createTicket} from '../../actions/ticket';
-
+import TicketForm from '../tickets/TicketForm'
 import {Link} from 'react-router-dom';
 
 class EventDetails extends PureComponent {
@@ -11,9 +11,16 @@ class EventDetails extends PureComponent {
         this.props.fetchEvent(this.props.match.params.id);
     }
 
+    createTicket = (ticket) => {
+        console.log("create ticket")
+        this.props.createTicket(ticket, this.props.match.params.id, this.props.currentUser.id)
+    }
+
     render() {
         const { event } = this.props;
         if (!event) return null
+
+        console.log("Creating ticket",this.props.currentUser)
         return (
             <div>
                 <h1>{event.name}</h1>
@@ -31,6 +38,13 @@ class EventDetails extends PureComponent {
                     <p>Price: {ticket.price}</p>
                     <img src={ticket.ticketPictureUrl} alt=""/>
                 </div> ))}
+
+                <br/>
+
+                { this.props.currentUser && <h2>Create a ticket to sell</h2> }
+
+                { this.props.currentUser && <TicketForm eventId={this.props.match.params.id} onSubmit={this.createTicket} /> }
+                { !this.props.currentUser && <h2 className="login-box">To create a new ticket, please <Link to="/login">login</Link></h2> }
                 </div>)
 }
 }

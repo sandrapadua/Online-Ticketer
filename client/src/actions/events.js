@@ -34,9 +34,13 @@ export const getEventDetails = (eventId) => (dispatch,getState) => {
     .catch(err => console.error(err))
 }
 
+
 export const createEvent = (event) => (dispatch, getState) => {
   const state = getState()
   const jwt = state.currentUser.jwt
+  console.log("STATE",state)
+  console.log("CJWT",jwt)
+
 console.log("CREATE EVENT",event)
   request
     .post(`${baseUrl}/events`)
