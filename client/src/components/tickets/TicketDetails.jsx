@@ -109,7 +109,7 @@ console.log("RISK",riskPercentage)
                 <h2>Ticket Details:</h2>
                 
                 <img src={ticket.ticketPictureUrl} alt=""/>
-                {<p>Risk percentage for the ticket: {riskPercentage}</p>}
+                {<p>Risk percentage for the ticket: {riskPercentage}%</p>}
 
                 {<p>Description: {ticket.description}</p>}
                 {<p>Price: {ticket.price}</p>}
