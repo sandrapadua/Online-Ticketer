@@ -12,6 +12,7 @@ class EventDetails extends PureComponent {
     }
 
     createTicket = (ticket) => {
+        console.log("create ticket")
         this.props.createTicket(ticket, this.props.match.params.id, this.props.currentUser.id)
     }
 
