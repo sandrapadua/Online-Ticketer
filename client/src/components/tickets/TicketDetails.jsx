@@ -5,10 +5,15 @@ import {Link} from 'react-router-dom';
 import {createComment} from '../../actions/comment';
 import CommentForm from '../comments/CommentForm';
 
+
 class TicketDetails extends PureComponent {
     componentDidMount() {
         console.log("fetching details")
         this.props.fetchTicket(this.props.match.params.id);
+    }
+    createComment = (comment) => {
+        console.log("creating comment")
+        this.props.createComment(comment, this.props.match.params.id)
     }
 
     render() {

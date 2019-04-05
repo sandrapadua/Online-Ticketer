@@ -25,6 +25,7 @@ export default class CommentController {
         @Body() comment: Comment,
         @Param('id') id: number
         ) {
+            console.log("***************creating comments************")
             comment.ticket = id;
             return comment.save()
         } 

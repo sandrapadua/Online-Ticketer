@@ -21,8 +21,7 @@ import Event from './entity'
     @Post('/events')
     @HttpCode(201)
     createEvent(
-        
-        @Body() event: Event
+ @Body() event: Event
     ) {
         console.log('*******************CREATE EVENT ****************')
         return event.save()
