@@ -35,7 +35,7 @@ console.log('TOPBAR',user)
         }
              {
           location.pathname.indexOf('events') > 0 &&
-          <Button color="inherit" onClick={() => history.push('/events')}>All events</Button>
+          <Button color="inherit" onClick={() => history.push('/')}>All events</Button>
         }
         {
           /$/.test(location.pathname) &&

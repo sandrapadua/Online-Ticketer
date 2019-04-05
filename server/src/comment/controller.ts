@@ -21,12 +21,18 @@ export default class CommentController {
     @Authorized()
     @Post('/comments/:id')
     @HttpCode(201)
-        createComment(
+       async createComment(
         @Body() comment: Comment,
         @Param('id') id: number
         ) {
             console.log("***************creating comments************")
             comment.ticket = id;
-            return comment.save()
+            return await comment.save()
         } 
+
+
+
+
+
+
     }
