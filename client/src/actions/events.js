@@ -1,5 +1,7 @@
 import * as request from 'superagent'
 import { baseUrl } from '../constants'
+import {logout} from './users'
+import {isExpired} from '../jwt'
 
 export const FETCHED_ALL_EVENTS = 'FETCHED_ALL_EVENTS'
 export const LOAD_EVENT_DETAILS = 'LOAD_EVENT_DETAILS'
@@ -16,6 +18,7 @@ const loadEventDetails = (event) => ({
   type: LOAD_EVENT_DETAILS,
   payload: event
 })
+
 
 export const fetchAllEvents = () => (dispatch) => {
   console.log("get all events in action")
@@ -39,7 +42,10 @@ export const createEvent = (event) => (dispatch, getState) => {
   const state = getState()
   const jwt = state.currentUser.jwt
   console.log("STATE",state)
-  console.log("CJWT",jwt)
+  console.log("JWT",jwt)
+
+
+  if (isExpired(jwt)) return dispatch(logout())
 
 console.log("CREATE EVENT",event)
   request

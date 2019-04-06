@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import store from './store'
-import {Provider} from 'react-redux'
 import { Route } from 'react-router-dom'
 import LogoutPage from './components/logout/LogoutPage'
 import EventDetails from './components/events/EventDetails';
@@ -13,7 +11,7 @@ import SignupPage from './components/signup/SignupPage'
 class App extends Component {
   render() {
     return (
-      <Provider store={store}>
+    
       <div className="App">
       <TopBar/>
       <main style={{ marginTop: 75 }}>
@@ -26,7 +24,7 @@ class App extends Component {
 </main>
     
             </div>
-      </Provider>
+
     );
   }
 }
