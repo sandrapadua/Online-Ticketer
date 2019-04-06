@@ -27,9 +27,11 @@ const app = createKoaServer({
       if (header && header.startsWith('Bearer ')) {
         const [ , token ] = header.split(' ')
         try {
+          console.log("auth true******************")
           return !!(token && verify(token))
         }
         catch (e) {
+          console.log("errorrrr*************8")
           throw new BadRequestError(e)
         }
       }
