@@ -20,10 +20,11 @@ import Event from './entity'
     @Authorized()
     @Post('/events')
     @HttpCode(201)
-    createEvent(
- @Body() event: Event
+   async  createEvent(
+  @Body() event: Event
     ) {
+
         console.log('*******************CREATE EVENT ****************')
-        return event.save()
+        return await event.save()
     } //post not working
 }

@@ -21,8 +21,9 @@ const app = createKoaServer({
       LoginController
     ],
     authorizationChecker: (action: Action) => {
+      console.log('*****************authorisation checker***************')
       const header: string = action.request.headers.authorization
-    
+    console.log("*************HEADER************",header)
       if (header && header.startsWith('Bearer ')) {
         const [ , token ] = header.split(' ')
         try {
@@ -54,3 +55,4 @@ setupDb()
     app.listen(port, () => console.log(`Listening on port ${port}`))
   )
   .catch(err => console.error(err))
+
