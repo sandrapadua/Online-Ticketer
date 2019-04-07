@@ -23,7 +23,7 @@ const reducer = (state = initialState, action = {}) => {
             }
 
             case ADD_EVENT:
-            console.log("add event reducer",action.payload)
+            console.log("add event reducer",action.payload,'STATE',state)
             return {
                 ...state,
                 allEvents: [...state.allEvents,action.payload]
