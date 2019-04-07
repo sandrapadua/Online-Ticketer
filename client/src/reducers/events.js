@@ -1,5 +1,4 @@
-import { FETCHED_ALL_EVENTS, LOAD_EVENT_DETAILS, ADD_EVENT } from '../actions/events'
-import {ADD_TICKET} from '../actions/ticket'
+import { FETCHED_ALL_EVENTS,ADD_EVENT } from '../actions/events'
 
 const initialState = { allEvents: [], selectedEvent: null }
 
@@ -24,16 +23,12 @@ const reducer = (state = initialState, action = {}) => {
             }
 
             case ADD_EVENT:
-            console.log("add event reducer")
-            return [...state, action.payload]
+            console.log("add event reducer",action.payload,'STATE',state)
+            return {
+                ...state,
+                allEvents: [...state.allEvents,action.payload]
+            }
 
-            case ADD_TICKET:
-                const currentEvent = state.filter(event => event.Id === action.payload.event)[0];
-                currentEvent.tickets = [
-                ...currentEvent.tickets || [], { ...action.payload, comments: [] }
-                ];
-
-    return [...state, currentEvent];
 
         default:
         return state
