@@ -12,7 +12,7 @@ class EventDetails extends PureComponent {
     }
 
     createTicket = (ticket) => {
-        console.log("create ticket")
+        console.log("create ticket ID IS ", this.props.currentUser.id)
         this.props.createTicket(ticket, this.props.match.params.id, this.props.currentUser.id)
     }
 
@@ -20,7 +20,10 @@ class EventDetails extends PureComponent {
         const { event } = this.props;
         if (!event) return null
 
-        console.log("Creating ticket",this.props.currentUser)
+        console.log("Creating USER in tickte creation",this.props.currentUser)
+        console.log("Creating USER in tickte creation",this.props.currentUser.id)
+
+
         return (
             <div>
                 <h1>{event.name}</h1>

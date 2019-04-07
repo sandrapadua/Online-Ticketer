@@ -9,7 +9,6 @@ export const USER_SIGNUP_FAILED = 'USER_SIGNUP_FAILED'
 export const UPDATE_USERS = 'UPDATE_USERS'
 export const USER_LOGOUT = 'USER_LOGOUT'
 
-const success = true
 
 
 const userSignupSuccess = () => ({
