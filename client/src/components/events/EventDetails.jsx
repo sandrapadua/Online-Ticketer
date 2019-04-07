@@ -20,8 +20,8 @@ class EventDetails extends PureComponent {
         const { event } = this.props;
         if (!event) return null
 
-        console.log("Creating USER in tickte creation",this.props.currentUser)
-        console.log("Creating USER in tickte creation",this.props.currentUser.id)
+        // console.log("Creating USER in tickte creation",this.props.currentUser)
+        // console.log("Creating USER in tickte creation",this.props.currentUser.id)
 
 
         return (
